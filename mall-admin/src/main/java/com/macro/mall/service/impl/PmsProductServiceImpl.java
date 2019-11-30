@@ -8,7 +8,6 @@ import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import com.macro.mall.service.PmsProductService;
-import io.swagger.annotations.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +93,9 @@ public class PmsProductServiceImpl implements PmsProductService {
     }
 
     private void handleSkuStockCode(List<PmsSkuStock> skuStockList, Long productId) {
-        if(CollectionUtils.isEmpty(skuStockList))return;
+        if(CollectionUtils.isEmpty(skuStockList)){
+            return;
+        }
         for(int i=0;i<skuStockList.size();i++){
             PmsSkuStock skuStock = skuStockList.get(i);
             if(StringUtils.isEmpty(skuStock.getSkuCode())){
@@ -333,7 +334,9 @@ public class PmsProductServiceImpl implements PmsProductService {
      */
     private void relateAndInsertList(Object dao, List dataList, Long productId) {
         try {
-            if (CollectionUtils.isEmpty(dataList)) return;
+            if (CollectionUtils.isEmpty(dataList)) {
+                return;
+            }
             for (Object item : dataList) {
                 Method setId = item.getClass().getMethod("setId", Long.class);
                 setId.invoke(item, (Long) null);
